@@ -27,13 +27,13 @@ class VisitedTailPositionsFinder
     length = length.to_i
     case direction
     when "U"
-      go(length) { h[1] -= 1 }
+      go(length) { h.y -= 1 }
     when "R"
-      go(length) { h[0] += 1 }
+      go(length) { h.x += 1 }
     when "D"
-      go(length) { h[1] += 1 }
+      go(length) { h.y += 1 }
     when "L"
-      go(length) { h[0] -= 1 }
+      go(length) { h.x -= 1 }
     end
   end
 
