@@ -40,13 +40,17 @@ class VisitedTailPositionsFinder
   def go(length)
     length.times do
       yield
-      prev = h
-      @body.each do |point|
-        move_point(point, prev) unless adjacent?(point, prev)
-        prev = point
-      end
-      mark_t_visited
+      move_body
     end
+  end
+
+  def move_body
+    prev = h
+    body.each do |point|
+      move_point(point, prev) unless adjacent?(point, prev)
+      prev = point
+    end
+    mark_t_visited
   end
 
   def move_point(this, prev)
