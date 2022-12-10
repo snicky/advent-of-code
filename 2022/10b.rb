@@ -8,14 +8,7 @@ class CRT
 
   def execute
     commands.each { |c| execute_command(c) }
-    (1..240).each_slice(40) do |cycles|
-      lines = cycles.each_with_index.reduce("") do |memo, (cycle, index)|
-        sprite_middle = values_at_cycles[cycle]
-        sprite_position = (sprite_middle-1..sprite_middle+1)
-        memo += (sprite_position.include?(index) ? "#" : ".")
-      end
-      puts lines
-    end
+    print_pixels
   end
 
   private
@@ -37,9 +30,14 @@ class CRT
     values_at_cycles[cycles] = value
   end
 
-  def reported_signal_strengths_sum
-    values_at_cycles.reduce(0) do |memo, (cycle, value)|
-      memo += cycle * value
+  def print_pixels
+    (1..240).each_slice(40) do |cycles|
+      lines = cycles.each_with_index.reduce("") do |memo, (cycle, index)|
+        sprite_middle = values_at_cycles[cycle]
+        sprite_position = (sprite_middle-1..sprite_middle+1)
+        memo += (sprite_position.include?(index) ? "#" : ".")
+      end
+      puts lines
     end
   end
 end
