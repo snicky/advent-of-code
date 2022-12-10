@@ -16,10 +16,8 @@ class SignalStrengthFinder
   attr_reader :commands, :value, :cycle, :values_at_cycles
 
   def execute_command(command)
-    if command == "noop"
-      increment_and_report_cycle
-    else
-      increment_and_report_cycle
+    increment_and_report_cycle
+    unless command == "noop"
       increment_and_report_cycle { @value += command.split(" ").last.to_i }
     end
   end
